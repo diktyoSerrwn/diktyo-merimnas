@@ -376,7 +376,7 @@ export default function CategoryPage() {
       <nav className="bg-blue-800 text-white shadow-lg p-6">
         <div className="max-w-6xl mx-auto flex flex-col items-center">
           <Link href="/" className="text-xl font-black uppercase tracking-tighter hover:text-blue-200 transition">
-            ΔΙΚΤΥΟ ΦΟΙΤΗΤΙΚΗΣ ΜΕΡΙΜΝΑΣ
+            ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
           </Link>
         </div>
       </nav>
@@ -400,7 +400,7 @@ export default function CategoryPage() {
       </main>
 
       <footer className="py-8 text-center text-gray-400 text-xs font-bold uppercase">
-        &copy; 2026 ΔΙΚΤΥΟ ΦΟΙΤΗΤΙΚΗΣ ΜΕΡΙΜΝΑΣ
+        &copy; 2026 ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
       </footer>
     </div>
   );

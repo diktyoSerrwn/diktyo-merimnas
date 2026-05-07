@@ -58,7 +58,7 @@ export default function HomePage() {
       <nav className="bg-blue-800 text-white shadow-lg p-6 sticky top-0 z-50">
         <div className="max-w-6xl mx-auto flex flex-col items-center gap-4">
           <Link href="/" className="text-2xl md:text-3xl font-black tracking-tighter text-center uppercase">
-            ΔΙΚΤΥΟ ΦΟΙΤΗΤΙΚΗΣ ΜΕΡΙΜΝΑΣ
+            ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
           </Link>
           
           <div className="flex items-center gap-4">
@@ -99,7 +99,7 @@ export default function HomePage() {
           <div className="text-center py-20 space-y-12">
             <h1 className="text-5xl md:text-7xl font-black text-gray-900 leading-tight">
               Η ψηφιακή πύλη για το <br />
-              <span className="text-blue-700 uppercase">ΔΙΚΤΥΟ ΦΟΙΤΗΤΙΚΗΣ ΜΕΡΙΜΝΑΣ</span>
+              <span className="text-blue-700 uppercase">ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ</span>
             </h1>
             
             <div className="flex justify-center pt-4">
@@ -112,7 +112,7 @@ export default function HomePage() {
       </main>
 
       <footer className="py-8 border-t border-gray-200 text-center text-gray-400 text-xs font-bold tracking-widest uppercase">
-        &copy; 2026 ΔΙΚΤΥΟ ΦΟΙΤΗΤΙΚΗΣ ΜΕΡΙΜΝΑΣ
+        &copy; 2026 ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
       </footer>
     </div>
   );
