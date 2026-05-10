@@ -316,9 +316,6 @@ export default function CategoryPage() {
         </article>
       </main>
 
-      <footer className="py-10 border-t border-gray-100 text-center text-gray-400 text-xs font-bold uppercase">
-        &copy; 2026 ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
-      </footer>
     </div>
   );
 }

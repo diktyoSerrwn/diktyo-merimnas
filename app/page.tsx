@@ -111,9 +111,6 @@ export default function HomePage() {
         )}
       </main>
 
-      <footer className="py-8 border-t border-gray-200 text-center text-gray-400 text-xs font-bold tracking-widest uppercase">
-        &copy; 2026 ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
-      </footer>
     </div>
   );
 }

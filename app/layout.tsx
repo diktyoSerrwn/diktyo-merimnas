@@ -28,22 +28,22 @@ export default function RootLayout({
           </main>
 
           {/* ΤΟ EMAIL ΠΟΥ ΘΑ ΦΑΙΝΕΤΑΙ ΠΑΝΤΟΥ */}
-          <footer className="py-12 border-t border-gray-200 bg-white text-center w-full">
-            <div className="max-w-4xl mx-auto px-6">
-              <p className="text-gray-900 font-bold uppercase mb-2 tracking-widest text-sm">
-                ΕΠΙΚΟΙΝΩΝΙΑ
-              </p>
-              <a 
-                href="mailto:diktyoserrwn@gmail.com" 
-                className="text-blue-600 text-xl md:text-2xl font-black hover:text-blue-800 transition-colors"
-              >
-                diktyoserrwn@gmail.com
-              </a>
-              <div className="mt-8 text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em]">
-                &copy; 2026 ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
-              </div>
-            </div>
-          </footer>
+          <footer className="py-10 border-t border-gray-100 bg-white text-center w-full mt-auto">
+  <div className="max-w-4xl mx-auto px-6">
+    <p className="text-gray-900 font-bold uppercase mb-1 tracking-widest text-xs">
+      ΕΠΙΚΟΙΝΩΝΙΑ
+    </p>
+    <a 
+      href="mailto:diktyoserrwn@gmail.com" 
+      className="text-blue-600 text-lg md:text-xl font-black hover:text-blue-800 transition-colors"
+    >
+      diktyoserrwn@gmail.com
+    </a>
+    <div className="mt-6 text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em]">
+      &copy; 2026 ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
+    </div>
+  </div>
+</footer>
         </div>
       </body>
     </html>
