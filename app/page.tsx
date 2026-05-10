@@ -7,16 +7,16 @@ import Link from 'next/link';
 
 // Η ενημερωμένη λίστα με τα ονόματα
 const categories = [
-  { id: 'beltiosi-zois', title: 'Δίκτυο βελτίωσης φοιτητικής ζωής', icon: '🌱' },
+  { id: 'beltiosi-zois', title: 'Δικτυο βελτιωσης φοιτητικης ζωης', icon: '🌱' },
   { id: 'epaggelmatika-erevnitika', title: 'ΔΙΚΤΥΟ ΕΠΑΓΓΕΛΜΑΤΙΚΩΝ ΚΑΙ ΕΡΕΥΝΗΤΙΚΩΝ ΔΡΑΣΤΗΡΙΟΤΗΤΩΝ', icon: '🔬' },
   { id: 'geniki-morfosi', title: 'ΔΙΚΤΥΟ ΓΕΝΙΚΗΣ ΜΟΡΦΩΣΗΣ', icon: '📖' },
   { id: 'ethelontismos-prosfora', title: 'ΔΙΚΤΥΟ ΕΘΕΛΟΝΤΙΣΜΟΥ ΚΑΙ ΚΟΙΝΩΝΙΚΗΣ ΠΡΟΣΦΟΡΑΣ', icon: '🤝' },
-  { id: 'politismos-dimiourgia', title: 'Δίκτυο Πολιτισμού και Δημιουργικών Δραστηριοτήτων', icon: '🎨' },
+  { id: 'politismos-dimiourgia', title: 'Δικτυο Πολιτισμου και Δημιουργικων Δραστηριοτητων', icon: '🎨' },
   { id: 'agrotiki-drasi', title: 'ΔΙΚΤΥΟ ΑΓΡΟΤΙΚΗΣ ΚΑΙ ΠΡΩΤΟΓΕΝΟΥΣ ΕΘΕΛΟΝΤΙΚΗΣ ΔΡΑΣΗΣ', icon: '🚜' },
   { id: 'praktikes-dexiotites', title: 'ΔΙΚΤΥΟ ΠΡΑΚΤΙΚΩΝ ΔΕΞΙΟΤΗΤΩΝ ΚΑΙ ΤΕΧΝΩΝ ΖΩΗΣ', icon: '🛠️' },
   // Τα νέα 5 δίκτυα
   { id: 'enimerosi-pr', title: 'ΔΙΚΤΥΟ ΕΝΗΜΕΡΩΣΗΣ ΚΑΙ ΔΗΜΟΣΙΩΝ ΣΧΕΣΕΩΝ', icon: '📢' },
-  { id: 'ellines-exoterikou', title: 'Δίκτυο Ελλήνων Φοιτητών Εξωτερικού & Αποδήμων', icon: '🌍' },
+  { id: 'ellines-exoterikou', title: 'Δικτυο Ελληνων Φοιτητων Εξωτερικου & Αποδημων', icon: '🌍' },
   { id: 'ekdromes-viomatika', title: 'ΔΙΚΤΥΟ ΕΚΔΡΟΜΩΝ ΚΑΙ ΒΙΩΜΑΤΙΚΩΝ ΔΡΑΣΕΩΝ', icon: '🎒' },
   { id: 'provlimatismos-idees', title: 'ΔΙΚΤΥΟ ΠΡΟΒΛΗΜΑΤΙΣΜΟΥ ΚΑΙ ΑΝΤΑΛΛΑΓΗΣ ΙΔΕΩΝ', icon: '💡' },
   { id: 'eirini-anthropismos', title: 'ΔΙΚΤΥΟ ΕΙΡΗΝΗΣ ΚΑΙ ΑΝΘΡΩΠΙΣΜΟΥ', icon: '🕊️' },
