@@ -104,7 +104,7 @@ export default function HomePage() {
             
             <div className="flex justify-center pt-4">
               <Link href="/signup" className="bg-blue-700 text-white px-12 py-5 rounded-full font-black text-xl hover:shadow-2xl hover:bg-blue-800 transition transform hover:scale-105 uppercase tracking-wider">
-                Δημιουργία Λογαριασμού
+                Δημιουργια Λογαριασμου
               </Link>
             </div>
           </div>
