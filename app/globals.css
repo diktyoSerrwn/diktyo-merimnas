@@ -26,7 +26,14 @@ body {
 }
 
 
-h1, h2, h3, .uppercase {
+/* Αυτό αφαιρεί αυτόματα τους τόνους από όλα τα κεφαλαία κείμενα */
+h1, h2, h3, h4, .uppercase-no-accents {
   text-transform: uppercase;
-  font-variant-caps: all-small-caps; /* Προαιρετικό για στυλ */
+  font-variant-ligatures: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Ειδική ρύθμιση για να "καθαρίσουν" οι τόνοι */
+[lang="el"] h1, [lang="el"] h2, [lang="el"] .uppercase-no-accents {
+  text-transform: uppercase;
 }
