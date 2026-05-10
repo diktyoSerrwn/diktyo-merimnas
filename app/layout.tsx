@@ -34,7 +34,7 @@ export default function RootLayout({
                 ΕΠΙΚΟΙΝΩΝΙΑ
               </p>
               <a 
-                href="mailto:info@diktyo-serrwn.com" 
+                href="mailto:diktyoserrwn@gmail.com" 
                 className="text-blue-600 text-xl md:text-2xl font-black hover:text-blue-800 transition-colors"
               >
                 info@diktyo-serrwn.com
