@@ -37,7 +37,7 @@ export default function RootLayout({
                 href="mailto:diktyoserrwn@gmail.com" 
                 className="text-blue-600 text-xl md:text-2xl font-black hover:text-blue-800 transition-colors"
               >
-                info@diktyo-serrwn.com
+                diktyoserrwn@gmail.com
               </a>
               <div className="mt-8 text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em]">
                 &copy; 2026 ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
