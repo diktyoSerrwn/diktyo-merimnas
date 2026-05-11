@@ -33,8 +33,9 @@ export default function HomePage() {
 
   useEffect(() => {
     const getInitialUser = async () => {
-      const { data: { user } } = await supabase.auth.getUser();
-      setUser(user);
+  const { data: { user } } = await supabase.auth.getUser();
+  console.log("User Metadata:", user?.user_metadata); // Αυτό θα μας δείξει στο F12 τι ονόματα έχουμε
+  setUser(user);
       if (user) {
         const { data } = await supabase.from('user_networks').select('selected_networks').eq('user_id', user.id).single();
         if (data) setSelectedNetworks(data.selected_networks || []);
