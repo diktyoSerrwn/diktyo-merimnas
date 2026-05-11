@@ -72,13 +72,7 @@ export default function HomePage() {
   <div className="mt-8 flex flex-col items-center">
     {/* Εδώ τραβάμε το όνομα από τα metadata, αν δεν υπάρχει βάζουμε το email ως εναλλακτική */}
     <p className="text-blue-100 font-bold mb-4 text-xl">
-  Καλώς ήρθες, {
-    user.user_metadata?.full_name || 
-    user.user_metadata?.first_name || 
-    user.user_metadata?.name || 
-    user.user_metadata?.username || 
-    user.email.split('@')[0] 
-  }
+  Καλώς ήρθες, {user.user_metadata?.full_name || user.user_metadata?.name || "Φίλε του Δικτύου"}
 </p>
     <button 
       onClick={handleLogout} 
