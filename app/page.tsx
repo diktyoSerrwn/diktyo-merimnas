@@ -65,15 +65,24 @@ export default function HomePage() {
       {/* HEADER / HERO SECTION - ΑΝΟΙΧΤΟ ΜΠΛΕ */}
 <header className="bg-sky-400 text-white pt-16 pb-32 px-6 text-center relative overflow-hidden">
   <div className="max-w-4xl mx-auto relative z-10">
-    <h1 className="text-4xl md:text-5xl font-black mb-4 uppercase tracking-tighter">
-      ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
-    </h1>
-    
-    {user ? (
-      <div className="mt-8 flex flex-col items-center">
-        <p className="text-sky-50 font-bold mb-4 text-xl">
-          Καλώς ήρθες, {user.user_metadata?.full_name || "Φίλε του Δικτύου"}
-        </p>
+    <h1 className="text-4xl md:text-5xl font-black mb-2 uppercase tracking-tighter">
+  ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
+</h1>
+
+{/* ΤΟ ΡΗΤΟ ΣΤΟ ΚΟΚΚΙΝΟ ΠΛΑΙΣΙΟ */}
+<div className="mb-6">
+  <p className="text-xl md:text-2xl font-medium italic text-sky-50 opacity-90 tracking-wide font-serif">
+    "Ένα πανεπιστήμιο ανοιχτό στην κοινωνία"
+  </p>
+  {/* Μια μικρή κομψή γραμμή από κάτω */}
+  <div className="w-24 h-1 bg-white/30 mx-auto mt-2 rounded-full"></div>
+</div>
+
+{user ? (
+  <div className="mt-4 flex flex-col items-center">
+    <p className="text-sky-50 font-bold mb-4 text-xl">
+       Φίλε του δικτύου, {user.user_metadata?.full_name || "καλώς ήρθες"}
+    </p>
         <button 
           onClick={handleLogout} 
           className="bg-white text-sky-500 px-8 py-3 rounded-full font-black uppercase text-sm hover:bg-sky-50 transition shadow-lg"
@@ -131,7 +140,7 @@ export default function HomePage() {
                 {!selectedNetworks.includes("Προβληματισμός & Ιδέες") && (
                   <div className="absolute inset-0 z-10 flex items-center justify-center p-10 text-center backdrop-blur-[1px]">
                     <div className="bg-blue-900 text-white p-8 rounded-[2.5rem] shadow-2xl uppercase font-black">
-                      ⚠️ ΑΠΑΙΤΕΙΤΑΙ ΕΝΤΑΞΗ ΣΤΟ 11ο ΔΙΚΤΥΟ
+                      ⚠️ ΑΠΑΙΤΕΙΤΑΙ ΕΝΤΑΞΗ ΣΤΟ ΔΙΚΤΥΟ "Προβληματισμός & ιδέες"
                     </div>
                   </div>
                 )}
