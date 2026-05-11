@@ -66,13 +66,19 @@ export default function HomePage() {
           <h1 className="text-4xl md:text-5xl font-black mb-4 uppercase tracking-tighter">ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ</h1>
           
 
-          
+
           {user ? (
   <div className="mt-8 flex flex-col items-center">
     {/* Εδώ τραβάμε το όνομα από τα metadata, αν δεν υπάρχει βάζουμε το email ως εναλλακτική */}
     <p className="text-blue-100 font-bold mb-4 text-xl">
-      Καλώς ήρθες, {user.user_metadata?.full_name || user.user_metadata?.first_name || user.email}
-    </p>
+  Καλώς ήρθες, {
+    user.user_metadata?.full_name || 
+    user.user_metadata?.first_name || 
+    user.user_metadata?.name || 
+    user.user_metadata?.username || 
+    user.email.split('@')[0] 
+  }
+</p>
     <button 
       onClick={handleLogout} 
       className="bg-white text-blue-700 px-8 py-3 rounded-full font-black uppercase text-sm hover:bg-blue-50 transition shadow-lg"
