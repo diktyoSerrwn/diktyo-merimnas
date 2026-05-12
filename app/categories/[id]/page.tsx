@@ -3,8 +3,9 @@
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 
-const categoryData: { [key: string]: { title: string; content: string } } = {
+const categoryData: { [key: string]: { title: string; emoji: string; content: string } } = {
   'beltiosi-zois': { 
+    emoji: '🏠',
     title: 'ΔΙΚΤΥΟ ΒΕΛΤΙΩΣΗΣ ΤΗΣ ΦΟΙΤΗΤΙΚΗΣ ΖΩΗΣ', 
     content: `Το Δίκτυο Βελτίωσης της Φοιτητικής Ζωής αποτελεί βασικό πυλώνα του Φοιτητικού Δικτύου Σερρών.
 
@@ -38,8 +39,8 @@ const categoryData: { [key: string]: { title: string; content: string } } = {
 • Συνεργάζεται ισότιμα με όλα τα Δίκτυα της φοιτητικής κοινότητας.
 • Συνεργάζεται με κοινωνικούς φορείς χωρίς εξαρτήσεις.` 
   },
-
-'epaggelmatika-erevnitika': { 
+  'epaggelmatika-erevnitika': { 
+    emoji: '🔬',
     title: 'ΔΙΚΤΥΟ ΕΠΑΓΓΕΛΜΑΤΙΚΩΝ ΚΑΙ ΕΡΕΥΝΗΤΙΚΩΝ ΔΡΑΣΤΗΡΙΟΤΗΤΩΝ', 
     content: `Δομή και ρόλος του Δικτύου
 • Το δίκτυο αποτελείται από Ελεύθερες Ομάδες φοιτητών που ερευνούν και δημιουργούν.
@@ -87,8 +88,8 @@ const categoryData: { [key: string]: { title: string; content: string } } = {
 • Μέσα από τις ομάδες μπορούν να γεννηθούν start-up εγχειρήματα.
 • Είτε εντός πανεπιστημίου (θερμοκοιτίδες) είτε μετά την αποφοίτηση.` 
   },
-
-'geniki-morfosi': { 
+  'geniki-morfosi': { 
+    emoji: '📚',
     title: 'ΔΙΚΤΥΟ ΓΕΝΙΚΗΣ ΜΟΡΦΩΣΗΣ', 
     content: `Η ΑΞΙΑ ΤΗΣ ΓΕΝΙΚΗΣ ΜΟΡΦΩΣΗΣ
 Η Γενική Μόρφωση αποτελεί βασικό θεμέλιο για την κατανόηση του κόσμου και τη συνειδητή συμμετοχή του ανθρώπου σε αυτόν. Δεν περιορίζεται στη συσσώρευση γνώσεων, αλλά αφορά την ικανότητα σύνδεσης, ερμηνείας και κριτικής προσέγγισης της πραγματικότητας.
@@ -110,8 +111,8 @@ const categoryData: { [key: string]: { title: string; content: string } } = {
 ΔΡΑΣΕΙΣ ΚΑΙ ΜΕΣΑ
 Το Δίκτυο οργανώνει: ομιλίες, σεμινάρια, συζητήσεις, θεματικές εκδηλώσεις και κύκλους διαλόγου. Μπορεί να προσκαλεί καθηγητές άλλων Τμημάτων ή να αξιοποιεί την εμπειρία της ίδιας της φοιτητικής κοινότητας. Διαμορφώνεται ανοιχτός ψηφιακός χώρος που φιλοξενεί το υλικό των δράσεων και λειτουργεί ως χώρος διαρκούς επιμόρφωσης και διαλόγου.` 
   },
-
-'ethelontismos-prosfora': { 
+  'ethelontismos-prosfora': { 
+    emoji: '🤝',
     title: 'ΔΙΚΤΥΟ ΕΘΕΛΟΝΤΙΣΜΟΥ ΚΑΙ ΚΟΙΝΩΝΙΚΗΣ ΠΡΟΣΦΟΡΑΣ', 
     content: `Ο εθελοντισμός δεν αποτελεί απλώς μια πράξη προσφοράς, αλλά μια συνειδητή στάση ζωής που ενώνει το άτομο με την κοινωνία μέσα από την αλληλεγγύη.
 
@@ -129,10 +130,10 @@ const categoryData: { [key: string]: { title: string; content: string } } = {
 • Μη υποκατάσταση επαγγελματιών: Οι εθελοντές δεν αντικαθιστούν γιατρούς, εκπαιδευτικούς ή διασώστες.
 • Προστασία προσωπικών δεδομένων: Απόλυτη εχεμύθεια για τα στοιχεία των ωφελούμενων.
 • Συλλογικότητα: Οι δράσεις σχεδιάζονται και υλοποιούνται ομαδικά.
-• Πολιτική Συνείδηση: Η δράση παραμένει ελεύθερη από κομματική καθοδήγηση.` 
+• Πολιτική Συνείδηση: Η δράση παραμένει ελεύθερη από κομματική καθοδήηση.` 
   },
-
   'politismos-dimiourgia': { 
+    emoji: '🎨',
     title: 'ΔΙΚΤΥΟ ΠΟΛΙΤΙΣΜΟΥ ΚΑΙ ΔΗΜΙΟΥΡΓΙΚΩΝ ΔΡΑΣΤΗΡΙΟΤΗΤΩΝ', 
     content: `Ο πολιτισμός αποτελεί θεμελιώδες στοιχείο της ανθρώπινης ύπαρξης και συλλογικής ζωής.
 
@@ -152,8 +153,8 @@ const categoryData: { [key: string]: { title: string; content: string } } = {
 • Μη εμπορικός χαρακτήρας: Οι δραστηριότητες δεν χρησιμοποιούνται για ιδιωτικό όφελος.
 • Ελευθερία έκφρασης: Η καλλιτεχνική δημιουργία είναι ελεύθερη.` 
   },
-
   'agrotiki-drasi': { 
+    emoji: '🌿',
     title: 'ΔΙΚΤΥΟ ΑΓΡΟΤΙΚΗΣ ΚΑΙ ΠΡΩΤΟΓΕΝΟΥΣ ΕΘΕΛΟΝΤΙΚΗΣ ΔΡΑΣΗΣ', 
     content: `Μάθηση, Συμμετοχή και Σύνδεση με τη Γη.
 
@@ -171,8 +172,8 @@ const categoryData: { [key: string]: { title: string; content: string } } = {
 • Μη Παραγωγική Εκμετάλλευση: Τα προϊόντα κατευθύνονται σε κοινωνικές δομές.
 • Ασφάλεια: Ακολουθούνται αυστηρά οι οδηγίες χρήσης εργαλείων.` 
   },
-
   'praktikes-dexiotites': { 
+    emoji: '🛠️',
     title: 'ΔΙΚΤΥΟ ΠΡΑΚΤΙΚΩΝ ΔΕΞΙΟΤΗΤΩΝ ΚΑΙ ΤΕΧΝΩΝ ΖΩΗΣ', 
     content: `Μάθηση για την Καθημερινότητα και την Αυτονομία.
 
@@ -188,8 +189,8 @@ const categoryData: { [key: string]: { title: string; content: string } } = {
 ΕΚΠΑΙΔΕΥΤΙΚΗ ΑΡΧΗ
 Ο φοιτητής μαθαίνει να φροντίζει το σπίτι του, όχι να αντικαθιστά τον επαγγελματία.` 
   },
-
   'enimerosi-pr': { 
+    emoji: '📢',
     title: 'ΔΙΚΤΥΟ ΕΝΗΜΕΡΩΣΗΣ ΚΑΙ ΔΗΜΟΣΙΩΝ ΣΧΕΣΕΩΝ', 
     content: `Ενημέρωση, Έκφραση και Επικοινωνία.
 
@@ -209,8 +210,8 @@ const categoryData: { [key: string]: { title: string; content: string } } = {
 • Πολυφωνία: Ισότιμη παρουσία διαφορετικών απόψεων.
 • Συντονισμός αντί Ιεραρχίας: Εναλλασσόμενοι συντονιστές χωρίς μόνιμες θέσεις εξουσίας.` 
   },
-
   'ellines-exoterikou': { 
+    emoji: '🌍',
     title: 'ΔΙΚΤΥΟ ΕΛΛΗΝΩΝ ΦΟΙΤΗΤΩΝ ΕΞΩΤΕΡΙΚΟΥ ΚΑΙ ΑΠΟΔΗΜΩΝ', 
     content: `Σύνδεση, Συνεργασία και Ελληνισμός.
 
@@ -223,8 +224,8 @@ const categoryData: { [key: string]: { title: string; content: string } } = {
 • Φιλοξενία φοιτητών από την Ελλάδα σε ελληνικές κοινότητες του εξωτερικού.
 • Φιλοξενία ομογενών φοιτητών στην Ελλάδα και ένταξή τους σε ακαδημαϊκές και κοινωνικές δράσεις.` 
   },
-
   'ekdromes-viomatika': { 
+    emoji: '🎒',
     title: 'ΔΙΚΤΥΟ ΕΚΔΡΟΜΩΝ ΚΑΙ ΒΙΩΜΑΤΙΚΩΝ ΔΡΑΣΕΩΝ', 
     content: `Βιωματική Παιδεία και Συλλογικότητα.
 
@@ -240,8 +241,8 @@ const categoryData: { [key: string]: { title: string; content: string } } = {
 • Σεβασμός στη φύση και στις τοπικές κοινωνίες.
 • Συλλογική ευθύνη και μέριμνα για την ασφάλεια όλων.` 
   },
-
   'provlimatismos-idees': { 
+    emoji: '💡',
     title: 'ΔΙΚΤΥΟ ΠΡΟΒΛΗΜΑΤΙΣΜΟΥ ΚΑΙ ΑΝΤΑΛΛΑΓΗΣ ΙΔΕΩΝ', 
     content: `Ψηφιακό Περιβάλλον Συμμετοχής και Διαλόγου.
 
@@ -257,8 +258,8 @@ const categoryData: { [key: string]: { title: string; content: string } } = {
 3. Διάλογος: Σχολιασμός και κατάθεση προτάσεων.
 4. Συντονισμός: Ομάδα διαχείρισης για τη διασφάλιση των κανόνων.` 
   },
-
   'eirini-anthropismos': { 
+    emoji: '🕊️',
     title: 'ΔΙΚΤΥΟ ΕΙΡΗΝΗΣ ΚΑΙ ΑΝΘΡΩΠΙΣΜΟΥ', 
     content: `Όραμα για έναν Δίκαιο και Ειρηνικό Κόσμο.
 
@@ -276,46 +277,67 @@ export default function CategoryPage() {
   const params = useParams();
   const id = params.id as string;
   
-  const category = categoryData[id] || { title: 'Η κατηγορία δεν βρέθηκε', content: '' };
+  const category = categoryData[id] || { title: 'Η κατηγορία δεν βρέθηκε', emoji: '❓', content: '' };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-      <nav className="bg-blue-900 text-white p-6 shadow-md">
-        <div className="max-w-5xl mx-auto">
-          <Link href="/" className="text-xl font-bold tracking-tighter uppercase">
-            ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
+      
+      {/* HEADER - ΤΙΡΚΟΥΑΖ */}
+      <header className="bg-teal-400 text-white pt-16 pb-32 px-6 text-center relative overflow-hidden">
+        <div className="max-w-4xl mx-auto relative z-10">
+          <Link 
+            href="/" 
+            className="inline-flex items-center text-teal-50 hover:text-white transition mb-8 font-black uppercase text-sm tracking-widest bg-teal-500/30 px-6 py-2 rounded-full"
+          >
+            <span className="mr-2">←</span> ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΠΥΛΗ
           </Link>
-        </div>
-      </nav>
-
-      <main className="flex-grow max-w-4xl mx-auto p-6 py-12 w-full">
-        <Link href="/" className="text-blue-700 font-bold flex items-center gap-2 mb-10 hover:text-blue-900 transition">
-           ← ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΑΡΧΙΚΗ
-        </Link>
-
-        <article className="bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-gray-100">
-          <h1 className="text-3xl md:text-4xl font-black text-gray-900 mb-8 leading-tight uppercase border-b-4 border-blue-600 pb-4 inline-block">
+          
+          <div className="text-7xl mb-6 drop-shadow-2xl">{category.emoji}</div>
+          <h1 className="text-4xl md:text-5xl font-black uppercase tracking-tighter leading-tight">
             {category.title}
           </h1>
+        </div>
+        
+        <div className="absolute top-0 left-0 w-full h-full opacity-20 pointer-events-none">
+          <div className="absolute top-[-20%] right-[-10%] w-[60%] h-[60%] bg-white rounded-full blur-[120px]"></div>
+        </div>
+      </header>
+
+      {/* CONTENT */}
+      <main className="max-w-4xl mx-auto p-6 w-full -mt-20 relative z-20 mb-20">
+        <article className="bg-white rounded-[3.5rem] shadow-2xl p-8 md:p-16 border border-gray-100">
           
           <div className="text-gray-800 leading-relaxed text-lg whitespace-pre-wrap">
             {category.content.split('\n').map((line, index) => {
-              // Αυτόματο Bold για τους τίτλους (Κεφαλαία χωρίς κουκκίδα)
+              // Styling για τους τίτλους μέσα στο κείμενο (Κεφαλαία)
               const isSubtitle = line === line.toUpperCase() && line.length > 5 && !line.startsWith('•') && !line.match(/^[0-9]/);
               
               if (isSubtitle) {
                 return (
-                  <div key={index} className="text-blue-800 font-extrabold text-xl mt-10 mb-4 tracking-tight">
+                  <div key={index} className="flex items-center text-teal-600 font-black text-2xl mt-12 mb-6 tracking-tight uppercase">
+                    <span className="w-10 h-1.5 bg-teal-400 mr-4 rounded-full"></span>
                     {line}
                   </div>
                 );
               }
-              return <div key={index} className="mb-2">{line}</div>;
+              return <div key={index} className="mb-2 font-medium">{line}</div>;
             })}
+          </div>
+
+          <div className="mt-16 pt-10 border-t border-gray-50 text-center">
+            <Link 
+              href="/"
+              className="inline-block bg-teal-500 text-white font-black py-5 px-14 rounded-2xl hover:bg-teal-600 transition-all active:scale-95 uppercase tracking-widest text-lg shadow-xl"
+            >
+              Ενταξη στο Δικτυο
+            </Link>
           </div>
         </article>
       </main>
 
+      <footer className="py-12 text-center text-teal-200 font-bold uppercase text-xs tracking-[0.4em] bg-gray-900 mt-auto">
+        ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ &copy; 2026
+      </footer>
     </div>
   );
 }
