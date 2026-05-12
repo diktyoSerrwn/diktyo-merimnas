@@ -61,31 +61,29 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-      {/* HEADER / HERO SECTION (ΤΟ ΠΑΛΙΟ ΣΟΥ DESIGN) */}
-      {/* HEADER / HERO SECTION - ΑΝΟΙΧΤΟ ΜΠΛΕ */}
-<header className="bg-sky-400 text-white pt-16 pb-32 px-6 text-center relative overflow-hidden">
+      {/* HEADER / HERO SECTION - ΤΙΡΚΟΥΑΖ */}
+<header className="bg-teal-400 text-white pt-16 pb-32 px-6 text-center relative overflow-hidden">
   <div className="max-w-4xl mx-auto relative z-10">
-    <h1 className="text-4xl md:text-5xl font-black mb-2 uppercase tracking-tighter">
-  ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
-</h1>
+    <h1 className="text-4xl md:text-5xl font-black mb-2 uppercase tracking-tighter shadow-sm">
+      ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
+    </h1>
 
-{/* ΤΟ ΡΗΤΟ ΣΤΟ ΚΟΚΚΙΝΟ ΠΛΑΙΣΙΟ */}
-<div className="mb-6">
-  <p className="text-xl md:text-2xl font-medium italic text-sky-50 opacity-90 tracking-wide font-serif">
-    "Ένα πανεπιστήμιο ανοιχτό στην κοινωνία"
-  </p>
-  {/* Μια μικρή κομψή γραμμή από κάτω */}
-  <div className="w-24 h-1 bg-white/30 mx-auto mt-2 rounded-full"></div>
-</div>
-
-{user ? (
-  <div className="mt-4 flex flex-col items-center">
-    <p className="text-sky-50 font-bold mb-4 text-xl">
-       Φίλε του δικτύου, {user.user_metadata?.full_name || "καλώς ήρθες"}
-    </p>
+    {/* ΤΟ ΡΗΤΟ ΣΟΥ */}
+    <div className="mb-6">
+      <p className="text-xl md:text-2xl font-medium italic text-teal-50 opacity-95 tracking-wide font-serif">
+        "Ένα πανεπιστήμιο ανοιχτό στην κοινωνία"
+      </p>
+      <div className="w-24 h-1 bg-white/30 mx-auto mt-2 rounded-full"></div>
+    </div>
+    
+    {user ? (
+      <div className="mt-8 flex flex-col items-center">
+        <p className="text-teal-50 font-bold mb-4 text-xl">
+          Φίλε του Δικτύου, καλώς ήρθες
+        </p>
         <button 
           onClick={handleLogout} 
-          className="bg-white text-sky-500 px-8 py-3 rounded-full font-black uppercase text-sm hover:bg-sky-50 transition shadow-lg"
+          className="bg-white text-teal-500 px-8 py-3 rounded-full font-black uppercase text-sm hover:bg-teal-50 transition shadow-lg"
         >
           Αποσυνδεση
         </button>
@@ -96,10 +94,10 @@ export default function HomePage() {
           Η ψηφιακή πύλη για το <br/> ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
         </h2>
         <div className="flex flex-col md:flex-row gap-4 justify-center mt-10">
-          <Link href="/login" className="bg-sky-600 text-white px-10 py-4 rounded-full font-black uppercase text-lg hover:bg-sky-700 transition shadow-2xl border-2 border-transparent">
+          <Link href="/login" className="bg-teal-600 text-white px-10 py-4 rounded-full font-black uppercase text-lg hover:bg-teal-700 transition shadow-2xl">
             Εισοδος Μελλους
           </Link>
-          <Link href="/signup" className="bg-white text-sky-900 px-10 py-4 rounded-full font-black uppercase text-lg hover:bg-gray-100 transition shadow-2xl text-sky-600">
+          <Link href="/signup" className="bg-white text-teal-600 px-10 py-4 rounded-full font-black uppercase text-lg hover:bg-gray-100 transition shadow-2xl">
             Δημιουργια Λογαριασμου
           </Link>
         </div>
