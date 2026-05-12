@@ -35,7 +35,7 @@ export default function RootLayout({
     </p>
     <a 
       href="mailto:diktyoserrwn@gmail.com" 
-      className="text-blue-600 text-lg md:text-xl font-black hover:text-blue-800 transition-colors"
+      className="text-teal-600 text-lg md:text-xl font-black hover:text-teal-600 transition-colors"
     >
       diktyoserrwn@gmail.com
     </a>

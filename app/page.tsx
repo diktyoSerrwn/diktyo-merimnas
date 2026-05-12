@@ -141,11 +141,11 @@ export default function HomePage() {
           {!selectedNetworks.includes("Προβληματισμός & Ιδέες") && (
             <div className="absolute inset-0 z-10 flex items-center justify-center p-10 text-center backdrop-blur-[1px]">
               <div className="bg-teal-600 text-white p-8 rounded-[2.5rem] shadow-2xl uppercase font-black">
-                ⚠️ ΑΠΑΙΤΕΙΤΑΙ ΕΝΤΑΞΗ ΣΤΟ 11ο ΔΙΚΤΥΟ
+                ⚠️ ΑΠΑΙΤΕΙΤΑΙ ΕΝΤΑΞΗ ΣΤΟ ΔΙΚΤΥΟ "ΠΡΟΒΛΗΜΑΤΙΣΜΟΣ & ΙΔΕΕΣ"
               </div>
             </div>
           )}
-          <h3 className="text-2xl font-black text-teal-900 mb-8 uppercase tracking-tight">ΜΗΝΥΜΑ ΠΡΟΣ ΔΙΑΧΕΙΡΙΣΤΗ</h3>
+          <h3 className="text-2xl font-black text-teal-900 mb-8 uppercase tracking-tight">ΜΗΝΥΜΑ ΠΡΟΣ ΔΙΚΤΥΟ</h3>
           <form action="https://formspree.io/f/mgodrbbj" method="POST" className="space-y-6">
             <input type="hidden" name="User_Email" value={user?.email || ''} />
             <input 
