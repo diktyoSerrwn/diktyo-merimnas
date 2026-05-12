@@ -79,7 +79,7 @@ const categoryData: { [key: string]: { title: string; emoji: string; content: st
 
 ΠΛΑΙΣΙΟ ΣΥΝΕΡΓΑΣΙΑΣ ΜΕ ΕΠΑΓΓΕΛΜΑΤΙΕΣ & ΑΓΟΡΑ
 • Οι επαγγελματίες συμμετέχουν ως μέντορες/συνεργάτες γνώσης — όχι ως εργοδότες ή αξιολογητές.
-• Μορφές: καθοδήγηση ομάδων, παρουσίαση πραγματικών προβλημάτων, εργαστήρια, πρακτική συμβουλευτική.
+• Μορφές: καθοδήηση ομάδων, παρουσίαση πραγματικών προβλημάτων, εργαστήρια, πρακτική συμβουλευτική.
 • Όρια: όχι ανάθεση κανονικής εργασίας, όχι υποκατάσταση θέσεων εργασίας, όχι αποκλειστικότητα συνεργασίας.
 • Πνευματικά δικαιώματα: το έργο ανήκει στην ομάδα, στον επαγγελματία ή και στο Πανεπιστήμιου. Οι όροι για επιχειρηματική συνέχεια καθορίζονται γραπτώς.
 • Διαφάνεια και δικαίωμα αποχώρησης χωρίς κυρώσεις ή εξαρτήσεις.
@@ -130,7 +130,7 @@ const categoryData: { [key: string]: { title: string; emoji: string; content: st
 • Μη υποκατάσταση επαγγελματιών: Οι εθελοντές δεν αντικαθιστούν γιατρούς, εκπαιδευτικούς ή διασώστες.
 • Προστασία προσωπικών δεδομένων: Απόλυτη εχεμύθεια για τα στοιχεία των ωφελούμενων.
 • Συλλογικότητα: Οι δράσεις σχεδιάζονται και υλοποιούνται ομαδικά.
-• Πολιτική Συνείδηση: Η δράση παραμένει ελεύθερη από κομματική καθοδήηση.` 
+• Πολιτική Συνείδηση: Η δράση παραμένει ελεύθερη από κομματική καθοδήγηση.` 
   },
   'politismos-dimiourgia': { 
     emoji: '🎨',
@@ -309,7 +309,6 @@ export default function CategoryPage() {
           
           <div className="text-gray-800 leading-relaxed text-lg whitespace-pre-wrap">
             {category.content.split('\n').map((line, index) => {
-              // Styling για τους τίτλους μέσα στο κείμενο (Κεφαλαία)
               const isSubtitle = line === line.toUpperCase() && line.length > 5 && !line.startsWith('•') && !line.match(/^[0-9]/);
               
               if (isSubtitle) {
@@ -322,15 +321,6 @@ export default function CategoryPage() {
               }
               return <div key={index} className="mb-2 font-medium">{line}</div>;
             })}
-          </div>
-
-          <div className="mt-16 pt-10 border-t border-gray-50 text-center">
-            <Link 
-              href="/"
-              className="inline-block bg-teal-500 text-white font-black py-5 px-14 rounded-2xl hover:bg-teal-600 transition-all active:scale-95 uppercase tracking-widest text-lg shadow-xl"
-            >
-              Ενταξη στο Δικτυο
-            </Link>
           </div>
         </article>
       </main>
