@@ -1,79 +1,116 @@
 'use client';
-
 import { useState } from 'react';
-import { supabase } from '../lib/supabase';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { supabase } from '../lib/supabase'; // Προσαρμογή διαδρομής αν χρειάζεται
 
 export default function SignupPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [department, setDepartment] = useState('');
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setError('');
 
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          first_name: firstName,
+          last_name: lastName,
+          department: department,
+        },
+      },
     });
 
     if (error) {
-      alert("Σφάλμα εγγραφής: " + error.message);
+      setError(error.message);
     } else {
-      alert("Επιτυχής εγγραφή! Μπορείς πλέον να συνδεθείς.");
+      alert('Επιτυχής εγγραφή! Μπορείτε τώρα να συνδεθείτε.');
       router.push('/login');
     }
-    setLoading(false);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4 font-sans">
-      <div className="bg-white p-8 rounded-[2.5rem] shadow-2xl w-full max-w-md border border-gray-100">
-        <h2 className="text-3xl font-black text-blue-900 mb-6 uppercase tracking-tight text-center">ΔΗΜΙΟΥΡΓΙΑ ΛΟΓΑΡΙΑΣΜΟΥ</h2>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+      <div className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full">
+        <h2 className="text-2xl font-black text-blue-950 mb-6 text-center uppercase">Δημιουργία Λογαριασμού</h2>
         
+        {error && <p className="bg-red-100 text-red-700 p-3 rounded-xl mb-4 text-sm font-bold">{error}</p>}
+
         <form onSubmit={handleSignup} className="space-y-4">
           <div>
-            <label className="block text-xs font-black uppercase text-gray-500 mb-2">Email</label>
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Όνομα</label>
+            <input 
+              type="text" 
+              required 
+              value={firstName} 
+              onChange={(e) => setFirstName(e.target.value)} 
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium" 
+              placeholder="π.χ. Κώστας"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Επώνυμο</label>
+            <input 
+              type="text" 
+              required 
+              value={lastName} 
+              onChange={(e) => setLastName(e.target.value)} 
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium" 
+              placeholder="π.χ. Παπαδόπουλος"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Τμήμα Σχολής</label>
+            <input 
+              type="text" 
+              required 
+              value={department} 
+              onChange={(e) => setDepartment(e.target.value)} 
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium" 
+              placeholder="π.χ. Μηχανικών Πληροφορικής"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Email</label>
             <input 
               type="email" 
               required 
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
-              className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-4 focus:ring-blue-100 outline-none font-bold"
-              placeholder="name@university.gr"
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium" 
+              placeholder="name@example.com"
             />
           </div>
+
           <div>
-            <label className="block text-xs font-black uppercase text-gray-500 mb-2">Κωδικός</label>
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Κωδικός</label>
             <input 
               type="password" 
               required 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
-              className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-4 focus:ring-blue-100 outline-none font-bold"
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium" 
               placeholder="••••••••"
             />
           </div>
+
           <button 
             type="submit" 
-            disabled={loading} 
-            className="w-full py-4 bg-blue-900 text-white font-black rounded-2xl hover:bg-blue-800 transition shadow-lg uppercase tracking-wider"
+            className="w-full py-4 bg-blue-900 text-white font-black rounded-2xl hover:bg-blue-800 transition-all uppercase tracking-widest shadow-lg shadow-blue-200 mt-4"
           >
-            {loading ? 'ΕΓΓΡΑΦΗ...' : 'ΕΓΓΡΑΦΗ'}
+            Εγγραφη
           </button>
         </form>
-
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600 font-medium">
-            Έχεις ήδη λογαριασμό; <Link href="/login" className="text-blue-900 font-black hover:underline">Είσοδος</Link>
-          </p>
-          <p className="mt-4">
-            <Link href="/" className="text-xs text-gray-400 font-bold hover:text-gray-600 uppercase">← Επιστροφή στην αρχική</Link>
-          </p>
-        </div>
       </div>
     </div>
   );
