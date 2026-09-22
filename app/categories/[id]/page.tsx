@@ -283,11 +283,11 @@ export default function CategoryPage() {
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       
       {/* HEADER - ΤΙΡΚΟΥΑΖ */}
-      <header className="bg-teal-400 text-white pt-16 pb-32 px-6 text-center relative overflow-hidden">
+      <header className="bg-blue-400 text-white pt-16 pb-32 px-6 text-center relative overflow-hidden">
         <div className="max-w-4xl mx-auto relative z-10">
           <Link 
             href="/" 
-            className="inline-flex items-center text-teal-50 hover:text-white transition mb-8 font-black uppercase text-sm tracking-widest bg-teal-500/30 px-6 py-2 rounded-full"
+            className="inline-flex items-center text-blue-50 hover:text-white transition mb-8 font-black uppercase text-sm tracking-widest bg-blue-500/30 px-6 py-2 rounded-full"
           >
             <span className="mr-2">←</span> ΕΠΙΣΤΡΟΦΗ ΣΤΗΝ ΠΥΛΗ
           </Link>
@@ -313,8 +313,8 @@ export default function CategoryPage() {
               
               if (isSubtitle) {
                 return (
-                  <div key={index} className="flex items-center text-teal-600 font-black text-2xl mt-12 mb-6 tracking-tight uppercase">
-                    <span className="w-10 h-1.5 bg-teal-400 mr-4 rounded-full"></span>
+                  <div key={index} className="flex items-center text-blue-600 font-black text-2xl mt-12 mb-6 tracking-tight uppercase">
+                    <span className="w-10 h-1.5 bg-blue-400 mr-4 rounded-full"></span>
                     {line}
                   </div>
                 );
