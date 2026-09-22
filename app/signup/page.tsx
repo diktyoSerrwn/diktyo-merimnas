@@ -61,7 +61,7 @@ export default function SignupPage() {
               required 
               value={firstName} 
               onChange={(e) => setFirstName(e.target.value)} 
-              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium" 
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium text-gray-900" 
               placeholder="π.χ. Κώστας"
             />
           </div>
@@ -73,7 +73,7 @@ export default function SignupPage() {
               required 
               value={lastName} 
               onChange={(e) => setLastName(e.target.value)} 
-              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium" 
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium text-gray-900" 
               placeholder="π.χ. Παπαδόπουλος"
             />
           </div>
@@ -84,7 +84,7 @@ export default function SignupPage() {
               required 
               value={department} 
               onChange={(e) => setDepartment(e.target.value)} 
-              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium text-gray-700"
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium text-gray-900"
             >
               <option value="" disabled>-- Επιλέξτε Τμήμα --</option>
               {departmentsList.map((dept) => (
@@ -100,7 +100,7 @@ export default function SignupPage() {
               required 
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
-              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium" 
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium text-gray-900" 
               placeholder="name@example.com"
             />
           </div>
@@ -111,8 +111,10 @@ export default function SignupPage() {
               type="password" 
               required 
               value={password} 
+              onChange="#{setPassword(e.target.value)}" 
+              // εδώ βεβαιώσου ότι έχεις το κλασικό onChange:
               onChange={(e) => setPassword(e.target.value)} 
-              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium" 
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium text-gray-900" 
               placeholder="••••••••"
             />
           </div>
