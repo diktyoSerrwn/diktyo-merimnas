@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { supabase } from '../lib/supabase';
 
 const departmentsList = [
@@ -111,8 +112,6 @@ export default function SignupPage() {
               type="password" 
               required 
               value={password} 
-              onChange="#{setPassword(e.target.value)}" 
-              // εδώ βεβαιώσου ότι έχεις το κλασικό onChange:
               onChange={(e) => setPassword(e.target.value)} 
               className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium text-gray-900" 
               placeholder="••••••••"
@@ -126,6 +125,13 @@ export default function SignupPage() {
             Εγγραφη
           </button>
         </form>
+
+        <p className="text-center mt-6 text-sm text-gray-600 font-medium">
+          Έχεις ήδη λογαριασμό;{' '}
+          <Link href="/login" className="text-blue-900 font-bold hover:underline">
+            Είσοδος
+          </Link>
+        </p>
       </div>
     </div>
   );
