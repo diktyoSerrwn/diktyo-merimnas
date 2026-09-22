@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { supabase } from './lib/supabase'; // Προσαρμογή διαδρομής αν χρειάζεται
+import { supabase } from './lib/supabase';
 
 const networks = [
   "Βελτίωση Φοιτητικής Ζωής", "Επαγγελματικές Δράσεις", "Γενική Μόρφωση",
@@ -30,13 +30,22 @@ export default function HomePage() {
   const [user, setUser] = useState<any>(null);
 
   useEffect(() => {
-    async function checkUser() {
-      const { data } = await supabase.auth.getUser();
-      if (data?.user) {
-        setUser(data.user);
+    async function getInitialData() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        setUser(user);
+        // Φόρτωση αποθηκευμένων δικτύων του χρήστη
+        const { data, error } = await supabase
+          .from('user_networks')
+          .select('network_name')
+          .eq('user_id', user.id);
+
+        if (data && !error) {
+          setSelectedNetworks(data.map(item => item.network_name));
+        }
       }
     }
-    checkUser();
+    getInitialData();
   }, []);
 
   const handleLogout = async () => {
@@ -45,23 +54,46 @@ export default function HomePage() {
     window.location.reload();
   };
 
-  const toggleNetwork = (network: string) => {
-    const updatedNetworks = selectedNetworks.includes(network) 
-      ? selectedNetworks.filter(n => n !== network) 
-      : [...selectedNetworks, network];
-    setSelectedNetworks(updatedNetworks);
+  const toggleNetwork = async (network: string) => {
+    if (!user) {
+      alert('Πρέπει να συνδεθείτε για να αποθηκεύσετε τα δίκτυά σας!');
+      return;
+    }
+
+    const isSelected = selectedNetworks.includes(network);
+
+    if (isSelected) {
+      // Αφαίρεση από τη βάση
+      const { error } = await supabase
+        .from('user_networks')
+        .delete()
+        .eq('user_id', user.id)
+        .eq('network_name', network);
+
+      if (!error) {
+        setSelectedNetworks(selectedNetworks.filter(n => n !== network));
+      }
+    } else {
+      // Προσθήκη στη βάση
+      const { error } = await supabase
+        .from('user_networks')
+        .insert([{ user_id: user.id, network_name: network }]);
+
+      if (!error) {
+        setSelectedNetworks([...selectedNetworks, network]);
+      }
+    }
   };
+
+  const firstName = user?.user_metadata?.first_name || user?.email;
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-      {/* HEADER / HERO SECTION - NAVY BLUE */}
       <header className="bg-blue-900 text-white pt-8 pb-32 px-6 text-center relative overflow-hidden">
-        
-        {/* ΚΟΥΜΠΙΑ ΕΙΣΟΔΟΥ / ΕΓΓΡΑΦΗΣ Ή ΠΡΟΦΙΛ ΧΡΗΣΤΗ ΣΤΗΝ ΚΟΡΥΦΗ */}
         <div className="max-w-6xl mx-auto flex justify-end gap-3 mb-10 relative z-20 items-center">
           {user ? (
             <div className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded-xl backdrop-blur-md border border-white/20">
-              <span className="text-sm font-bold text-blue-100">👤 {user.user_metadata?.first_name || user.email}</span>
+              <span className="text-sm font-bold text-blue-100">👤 {firstName}</span>
               <button 
                 onClick={handleLogout}
                 className="px-3 py-1 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg text-xs transition-all"
@@ -71,16 +103,10 @@ export default function HomePage() {
             </div>
           ) : (
             <>
-              <Link 
-                href="/login" 
-                className="px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-md transition-all border border-white/20 text-sm shadow-sm"
-              >
+              <Link href="/login" className="px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-md transition-all border border-white/20 text-sm shadow-sm">
                 Είσοδος
               </Link>
-              <Link 
-                href="/signup" 
-                className="px-5 py-2.5 bg-white text-blue-950 font-black rounded-xl hover:bg-blue-50 transition-all text-sm shadow-md"
-              >
+              <Link href="/signup" className="px-5 py-2.5 bg-white text-blue-950 font-black rounded-xl hover:bg-blue-50 transition-all text-sm shadow-md">
                 Εγγραφή
               </Link>
             </>
@@ -91,14 +117,12 @@ export default function HomePage() {
           <h1 className="text-4xl md:text-5xl font-black mb-2 uppercase tracking-tighter shadow-sm">
             ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
           </h1>
-
           <div className="mb-6">
             <p className="text-xl md:text-2xl font-medium italic text-blue-200 opacity-95 tracking-wide font-serif">
               "Ένα πανεπιστήμιο ανοιχτό στην κοινωνία"
             </p>
             <div className="w-24 h-1 bg-white/30 mx-auto mt-2 rounded-full"></div>
           </div>
-          
           <div className="mt-8">
             <p className="text-blue-100 font-bold text-xl uppercase tracking-wider">
                Η ψηφιακή πύλη για το Δίκτυο Φοιτητών Σερρών
@@ -108,8 +132,6 @@ export default function HomePage() {
       </header>
 
       <main className="max-w-6xl mx-auto p-6 py-12 w-full -mt-20 relative z-20">
-        
-        {/* ΤΑ 12 ΚΟΥΜΠΙΑ ΔΙΚΤΥΩΝ */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
           {categoryLinks.map((cat) => (
             <Link 
@@ -125,11 +147,8 @@ export default function HomePage() {
           ))}
         </div>
 
-        {/* SECTION: ΕΝΤΑΞΗ & ΕΠΙΚΟΙΝΩΝΙΑ */}
         <section className="bg-white rounded-[3.5rem] shadow-2xl border border-gray-100 overflow-hidden mb-20">
           <div className="flex flex-col md:flex-row">
-            
-            {/* ΑΡΙΣΤΕΡΑ: CHECKBOXES */}
             <div className="w-full md:w-1/2 p-10 md:p-14 bg-blue-50/40 border-r border-gray-100">
               <h3 className="text-2xl font-black text-blue-950 mb-8 uppercase tracking-tight">ΕΝΤΑΞΗ ΣΕ ΔΙΚΤΥΑ</h3>
               <div className="grid grid-cols-1 gap-3">
@@ -149,7 +168,6 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* ΔΕΞΙΑ: ΦΟΡΜΑ */}
             <div className="w-full md:w-1/2 p-10 md:p-14 relative">
               <h3 className="text-2xl font-black text-blue-950 mb-8 uppercase tracking-tight">ΜΗΝΥΜΑ ΠΡΟΣ ΔΙΚΤΥΟ</h3>
               <form action="https://formspree.io/f/mgodrbbj" method="POST" className="space-y-6">
@@ -158,14 +176,14 @@ export default function HomePage() {
                   required 
                   type="text" 
                   placeholder="Δημόσιο Ψευδώνυμο" 
-                  className="w-full p-5 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-4 focus:ring-blue-100 outline-none font-bold" 
+                  className="w-full p-5 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-4 focus:ring-blue-100 outline-none font-bold text-gray-900" 
                 />
                 <textarea 
                   name="message" 
                   required 
                   rows={6} 
                   placeholder="Το μήνυμά σας..." 
-                  className="w-full p-5 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-4 focus:ring-blue-100 outline-none resize-none font-medium"
+                  className="w-full p-5 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-4 focus:ring-blue-100 outline-none resize-none font-medium text-gray-900"
                 ></textarea>
                 <button 
                   type="submit" 
