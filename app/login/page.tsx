@@ -1,79 +1,78 @@
 'use client';
-
 import { useState } from 'react';
-import { supabase } from '../lib/supabase';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { supabase } from '../lib/supabase';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setError('');
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
     if (error) {
-      alert("Σφάλμα σύνδεσης: " + error.message);
+      setError(error.message);
     } else {
       router.push('/');
       router.refresh();
     }
-    setLoading(false);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4 font-sans">
-      <div className="bg-white p-8 rounded-[2.5rem] shadow-2xl w-full max-w-md border border-gray-100">
-        <h2 className="text-3xl font-black text-blue-900 mb-6 uppercase tracking-tight text-center">ΕΙΣΟΔΟΣ ΜΕΛΛΟΥΣ</h2>
+    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+      <div className="bg-white p-8 rounded-3xl shadow-xl max-w-md w-full">
+        <h2 className="text-2xl font-black text-blue-950 mb-6 text-center uppercase">Σύνδεση</h2>
         
+        {error && <p className="bg-red-100 text-red-700 p-3 rounded-xl mb-4 text-sm font-bold">{error}</p>}
+
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block text-xs font-black uppercase text-gray-500 mb-2">Email</label>
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Email</label>
             <input 
               type="email" 
               required 
               value={email} 
               onChange={(e) => setEmail(e.target.value)} 
-              className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-4 focus:ring-blue-100 outline-none font-bold"
-              placeholder="name@university.gr"
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium text-gray-900" 
+              placeholder="name@example.com"
             />
           </div>
+
           <div>
-            <label className="block text-xs font-black uppercase text-gray-500 mb-2">Κωδικός</label>
+            <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Κωδικός</label>
             <input 
               type="password" 
               required 
               value={password} 
               onChange={(e) => setPassword(e.target.value)} 
-              className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-4 focus:ring-blue-100 outline-none font-bold"
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium text-gray-900" 
               placeholder="••••••••"
             />
           </div>
+
           <button 
             type="submit" 
-            disabled={loading} 
-            className="w-full py-4 bg-blue-900 text-white font-black rounded-2xl hover:bg-blue-800 transition shadow-lg uppercase tracking-wider"
+            className="w-full py-4 bg-blue-900 text-white font-black rounded-2xl hover:bg-blue-800 transition-all uppercase tracking-widest shadow-lg shadow-blue-200 mt-4"
           >
-            {loading ? 'ΣΥΝΔΕΣΗ...' : 'ΣΥΝΔΕΣΗ'}
+            Εισοδος
           </button>
         </form>
 
-        <div className="mt-6 text-center">
-          <p className="text-sm text-gray-600 font-medium">
-            Δεν έχεις λογαριασμό; <Link href="/signup" className="text-blue-900 font-black hover:underline">Εγγραφή</Link>
-          </p>
-          <p className="mt-4">
-            <Link href="/" className="text-xs text-gray-400 font-bold hover:text-gray-600 uppercase">← Επιστροφή στην αρχική</Link>
-          </p>
-        </div>
+        <p className="text-center mt-6 text-sm text-gray-600 font-medium">
+          Δεν έχεις λογαριασμό;{' '}
+          <Link href="/signup" className="text-blue-900 font-bold hover:underline">
+            Εγγραφή
+          </Link>
+        </p>
       </div>
     </div>
   );
