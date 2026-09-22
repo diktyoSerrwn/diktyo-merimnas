@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import Link from 'next/link';
 
@@ -38,7 +37,24 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       {/* HEADER / HERO SECTION - NAVY BLUE */}
-      <header className="bg-blue-900 text-white pt-16 pb-32 px-6 text-center relative overflow-hidden">
+      <header className="bg-blue-900 text-white pt-8 pb-32 px-6 text-center relative overflow-hidden">
+        
+        {/* ΚΟΥΜΠΙΑ ΕΙΣΟΔΟΥ / ΕΓΓΡΑΦΗΣ ΣΤΗΝ ΚΟΡΥΦΗ */}
+        <div className="max-w-6xl mx-auto flex justify-end gap-3 mb-10 relative z-20">
+          <Link 
+            href="/login" 
+            className="px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-md transition-all border border-white/20 text-sm shadow-sm"
+          >
+            Είσοδος
+          </Link>
+          <Link 
+            href="/signup" 
+            className="px-5 py-2.5 bg-white text-blue-950 font-black rounded-xl hover:bg-blue-50 transition-all text-sm shadow-md"
+          >
+            Εγγραφή
+          </Link>
+        </div>
+
         <div className="max-w-4xl mx-auto relative z-10">
           <h1 className="text-4xl md:text-5xl font-black mb-2 uppercase tracking-tighter shadow-sm">
             ΔΙΚΤΥΟ ΦΟΙΤΗΤΩΝ ΣΕΡΡΩΝ
