@@ -1,7 +1,17 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { supabase } from '../lib/supabase'; // Προσαρμογή διαδρομής αν χρειάζεται
+import { supabase } from '../lib/supabase';
+
+const departmentsList = [
+  "Μηχανικών Πληροφορικής",
+  "Μηχανικών Τοπογραφίας",
+  "Μηχανολόγων Μηχανικών",
+  "Πολιτικών Μηχανικών",
+  "Οικονομικών Επιστημών",
+  "Διοίκησης Επιχειρήσεων",
+  "Εσωτερικής Αρχιτεκτονικής"
+];
 
 export default function SignupPage() {
   const [email, setEmail] = useState('');
@@ -70,14 +80,17 @@ export default function SignupPage() {
 
           <div>
             <label className="block text-xs font-bold text-gray-600 uppercase mb-1">Τμήμα Σχολής</label>
-            <input 
-              type="text" 
+            <select 
               required 
               value={department} 
               onChange={(e) => setDepartment(e.target.value)} 
-              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium" 
-              placeholder="π.χ. Μηχανικών Πληροφορικής"
-            />
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl outline-none focus:ring-2 focus:ring-blue-600 font-medium text-gray-700"
+            >
+              <option value="" disabled>-- Επιλέξτε Τμήμα --</option>
+              {departmentsList.map((dept) => (
+                <option key={dept} value={dept}>{dept}</option>
+              ))}
+            </select>
           </div>
 
           <div>
