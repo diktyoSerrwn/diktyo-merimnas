@@ -1,6 +1,7 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { supabase } from './lib/supabase'; // Προσαρμογή διαδρομής αν χρειάζεται
 
 const networks = [
   "Βελτίωση Φοιτητικής Ζωής", "Επαγγελματικές Δράσεις", "Γενική Μόρφωση",
@@ -26,6 +27,23 @@ const categoryLinks = [
 
 export default function HomePage() {
   const [selectedNetworks, setSelectedNetworks] = useState<string[]>([]);
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    async function checkUser() {
+      const { data } = await supabase.auth.getUser();
+      if (data?.user) {
+        setUser(data.user);
+      }
+    }
+    checkUser();
+  }, []);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    setUser(null);
+    window.location.reload();
+  };
 
   const toggleNetwork = (network: string) => {
     const updatedNetworks = selectedNetworks.includes(network) 
@@ -39,20 +57,34 @@ export default function HomePage() {
       {/* HEADER / HERO SECTION - NAVY BLUE */}
       <header className="bg-blue-900 text-white pt-8 pb-32 px-6 text-center relative overflow-hidden">
         
-        {/* ΚΟΥΜΠΙΑ ΕΙΣΟΔΟΥ / ΕΓΓΡΑΦΗΣ ΣΤΗΝ ΚΟΡΥΦΗ */}
-        <div className="max-w-6xl mx-auto flex justify-end gap-3 mb-10 relative z-20">
-          <Link 
-            href="/login" 
-            className="px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-md transition-all border border-white/20 text-sm shadow-sm"
-          >
-            Είσοδος
-          </Link>
-          <Link 
-            href="/signup" 
-            className="px-5 py-2.5 bg-white text-blue-950 font-black rounded-xl hover:bg-blue-50 transition-all text-sm shadow-md"
-          >
-            Εγγραφή
-          </Link>
+        {/* ΚΟΥΜΠΙΑ ΕΙΣΟΔΟΥ / ΕΓΓΡΑΦΗΣ Ή ΠΡΟΦΙΛ ΧΡΗΣΤΗ ΣΤΗΝ ΚΟΡΥΦΗ */}
+        <div className="max-w-6xl mx-auto flex justify-end gap-3 mb-10 relative z-20 items-center">
+          {user ? (
+            <div className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded-xl backdrop-blur-md border border-white/20">
+              <span className="text-sm font-bold text-blue-100">👤 {user.email}</span>
+              <button 
+                onClick={handleLogout}
+                className="px-3 py-1 bg-red-600 hover:bg-red-700 text-white font-bold rounded-lg text-xs transition-all"
+              >
+                Αποσύνδεση
+              </button>
+            </div>
+          ) : (
+            <>
+              <Link 
+                href="/login" 
+                className="px-5 py-2.5 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl backdrop-blur-md transition-all border border-white/20 text-sm shadow-sm"
+              >
+                Είσοδος
+              </Link>
+              <Link 
+                href="/signup" 
+                className="px-5 py-2.5 bg-white text-blue-950 font-black rounded-xl hover:bg-blue-50 transition-all text-sm shadow-md"
+              >
+                Εγγραφή
+              </Link>
+            </>
+          )}
         </div>
 
         <div className="max-w-4xl mx-auto relative z-10">
