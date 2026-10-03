@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
-import { supabase } from '@/lib/supabase' // <-- Χρησιμοποιούμε το @/ για να βρίσκει πάντα τη σωστή διαδρομή
+import { supabase } from '@/lib/supabase'
 
 export default function LiveChat() {
   const [messages, setMessages] = useState([])
