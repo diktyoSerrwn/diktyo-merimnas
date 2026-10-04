@@ -54,6 +54,13 @@ export default function LiveChat() {
           setMessages((prev) => [...prev, payload.new])
         }
       )
+      .on(
+        'postgres_changes',
+        { event: 'DELETE', schema: 'public', table: 'messages' },
+        (payload) => {
+          setMessages((prev) => prev.filter((msg) => msg.id !== payload.old.id))
+        }
+      )
       .subscribe()
 
     return () => {
@@ -112,8 +119,26 @@ export default function LiveChat() {
     }
   }
 
+  const deleteMessage = async (id, msgToken) => {
+    if (msgToken !== userToken) {
+      alert('Μπορείτε να διαγράψετε μόνο τα δικά σας μηνύματα!')
+      return
+    }
+
+    const { error } = await supabase
+      .from('messages')
+      .delete()
+      .eq('id', id)
+
+    if (error) {
+      console.error('Error deleting message:', error)
+    } else {
+      setMessages((prev) => prev.filter((msg) => msg.id !== id))
+    }
+  }
+
   return (
-    <div className="flex flex-col h-[500px] w-full border rounded-3xl bg-white shadow-sm overflow-hidden border-gray-100">
+    <div className="flex flex-col h-[600px] w-full border rounded-3xl bg-white shadow-sm overflow-hidden border-gray-100">
       <div className="bg-blue-900 text-white p-4 text-sm font-bold flex flex-col sm:flex-row justify-between items-center gap-2">
         <span>💬 Ανώνυμο Live Chat</span>
         
@@ -152,7 +177,18 @@ export default function LiveChat() {
           const isMe = msg.user_token === userToken
           return (
             <div key={msg.id} className={`flex flex-col ${isMe ? 'items-end' : 'items-start'}`}>
-              <span className="text-[10px] text-gray-400 mb-1 px-1">{msg.username}</span>
+              <div className="flex items-center gap-2 mb-1 px-1">
+                <span className="text-[10px] text-gray-400">{msg.username}</span>
+                {isMe && (
+                  <button 
+                    onClick={() => deleteMessage(msg.id, msg.user_token)}
+                    className="text-[10px] text-red-500 hover:text-red-700 font-bold"
+                    title="Διαγραφή μηνύματος"
+                  >
+                    [×]
+                  </button>
+                )}
+              </div>
               <div
                 className={`p-3 rounded-2xl max-w-[85%] text-sm font-medium break-words ${
                   isMe ? 'bg-blue-600 text-white rounded-br-none' : 'bg-white text-gray-800 border border-gray-100 rounded-bl-none shadow-sm'
