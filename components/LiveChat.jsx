@@ -90,7 +90,7 @@ export default function LiveChat() {
       .limit(1)
 
     if (data && data.length > 0) {
-      setErrorMsg('Αυτό το όνομα χρησιμοποιείται ήδη από άλλον χρήστη!')
+      setErrorMsg('Αυτό το όνομα χρησιμοποιείται ήδη!')
       return
     }
 
@@ -138,19 +138,20 @@ export default function LiveChat() {
   }
 
   return (
-    <div className="flex flex-col h-[600px] w-full border rounded-3xl bg-white shadow-sm overflow-hidden border-gray-100">
-      <div className="bg-blue-900 text-white p-4 text-sm font-bold flex flex-col sm:flex-row justify-between items-center gap-2">
-        <span>💬 Ανώνυμο Live Chat</span>
+    <div className="flex flex-col h-[480px] w-full border rounded-3xl bg-white shadow-sm overflow-hidden border-gray-100">
+      {/* Header */}
+      <div className="bg-blue-900 text-white p-3 text-xs font-bold flex flex-col justify-between items-center gap-1">
+        <span className="text-sm">💬 Ανώνυμο Live Chat</span>
         
         {isEditingAlias ? (
-          <div className="flex flex-col items-end gap-1">
-            <form onSubmit={handleSaveAlias} className="flex items-center gap-1">
+          <div className="flex flex-col items-center gap-1 w-full">
+            <form onSubmit={handleSaveAlias} className="flex items-center gap-1 w-full justify-center">
               <input
                 type="text"
                 value={tempAlias}
                 onChange={(e) => setTempAlias(e.target.value)}
-                className="text-xs px-2 py-1 rounded text-gray-900 bg-white outline-none font-medium"
-                placeholder="Νέο ψευδώνυμο..."
+                className="text-xs px-2 py-1 rounded text-gray-900 bg-white outline-none font-medium w-28"
+                placeholder="Ψευδώνυμο..."
                 autoFocus
               />
               <button type="submit" className="bg-blue-700 hover:bg-blue-600 px-2 py-1 rounded text-xs">
@@ -160,11 +161,11 @@ export default function LiveChat() {
             {errorMsg && <span className="text-[10px] text-red-300">{errorMsg}</span>}
           </div>
         ) : (
-          <div className="flex items-center gap-2 text-xs bg-blue-800/80 px-3 py-1 rounded-full text-blue-100">
-            <span>Εσύ: <b>{alias}</b></span>
+          <div className="flex items-center gap-1 text-[11px] bg-blue-800/80 px-2.5 py-1 rounded-full text-blue-100">
+            <span className="truncate max-w-[110px]">Εσύ: <b>{alias}</b></span>
             <button 
               onClick={() => { setIsEditingAlias(true); setErrorMsg(''); }} 
-              className="underline hover:text-white transition text-[11px]"
+              className="underline hover:text-white transition text-[10px] whitespace-nowrap"
             >
               (Αλλαγή)
             </button>
@@ -172,7 +173,8 @@ export default function LiveChat() {
         )}
       </div>
 
-      <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-gray-50/50">
+      {/* Messages */}
+      <div className="flex-1 p-3 overflow-y-auto space-y-3 bg-gray-50/50">
         {messages.map((msg) => {
           const isMe = msg.user_token === userToken
           return (
@@ -190,7 +192,7 @@ export default function LiveChat() {
                 )}
               </div>
               <div
-                className={`p-3 rounded-2xl max-w-[85%] text-sm font-medium break-words ${
+                className={`p-2.5 rounded-2xl max-w-[90%] text-sm font-medium break-words ${
                   isMe ? 'bg-blue-600 text-white rounded-br-none' : 'bg-white text-gray-800 border border-gray-100 rounded-bl-none shadow-sm'
                 }`}
               >
@@ -202,17 +204,18 @@ export default function LiveChat() {
         <div ref={messagesEndRef} />
       </div>
 
-      <form onSubmit={sendMessage} className="p-3 border-t bg-white flex gap-2">
+      {/* Input Form - Διορθωμένο πλάτος ώστε να φαίνεται πάντα το κουμπί */}
+      <form onSubmit={sendMessage} className="p-2.5 border-t bg-white flex gap-1.5 items-center">
         <input
           type="text"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
-          placeholder="Γράψτε ένα μήνυμα..."
-          className="flex-1 border border-gray-200 rounded-2xl px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-gray-900 font-medium"
+          placeholder="Μήνυμα..."
+          className="min-w-0 flex-1 border border-gray-200 rounded-xl px-3 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-gray-900 font-medium"
         />
         <button
           type="submit"
-          className="bg-blue-900 text-white px-5 py-2 rounded-2xl text-sm font-bold hover:bg-blue-800 transition"
+          className="flex-shrink-0 bg-blue-900 text-white px-3.5 py-2 rounded-xl text-xs font-bold hover:bg-blue-800 transition"
         >
           Αποστολή
         </button>
