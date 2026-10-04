@@ -1,7 +1,9 @@
 'use client';
+
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { supabase } from './lib/supabase';
+import LiveChat from '@/components/LiveChat';
 
 const networks = [
   "Βελτίωση Φοιτητικής Ζωής", "Επαγγελματικές Δράσεις", "Γενική Μόρφωση",
@@ -50,8 +52,7 @@ export default function HomePage() {
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setUser(null);
-    setSelectedNetworks([]); // Καθαρισμός επιλογών
-    // Χωρίς reload, η σελίδα παραμένει στη θέση της σταθερή!
+    window.location.reload();
   };
 
   const toggleNetwork = async (network: string) => {
@@ -88,15 +89,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       <header className="bg-blue-900 text-white pt-8 pb-32 px-6 text-center relative overflow-hidden">
-        
         <div className="max-w-6xl mx-auto flex justify-end gap-3 mb-10 relative z-20 items-center">
-          <Link 
-            href="/chat" 
-            className="px-5 py-2.5 bg-blue-800 hover:bg-blue-700 text-white font-bold rounded-xl transition-all border border-blue-700 text-sm shadow-sm flex items-center gap-2"
-          >
-            💬 Live Chat
-          </Link>
-
           {user ? (
             <div className="flex items-center gap-3 bg-white/10 px-4 py-2 rounded-xl backdrop-blur-md border border-white/20">
               <span className="text-sm font-bold text-blue-100">👤 {firstName}</span>
@@ -154,19 +147,20 @@ export default function HomePage() {
         </div>
 
         <section className="bg-white rounded-[3.5rem] shadow-2xl border border-gray-100 overflow-hidden mb-20">
-          <div className="flex flex-col md:flex-row">
-            <div className="w-full md:w-1/2 p-10 md:p-14 bg-blue-50/40 border-r border-gray-100">
-              <h3 className="text-2xl font-black text-blue-950 mb-8 uppercase tracking-tight">ΕΝΤΑΞΗ ΣΕ ΔΙΚΤΥΑ</h3>
-              <div className="grid grid-cols-1 gap-3">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
+            {/* 1. Ενταξη σε δίκτυα */}
+            <div className="p-8 md:p-12 bg-blue-50/40 border-b lg:border-b-0 lg:border-r border-gray-100">
+              <h3 className="text-xl font-black text-blue-950 mb-6 uppercase tracking-tight">ΕΝΤΑΞΗ ΣΕ ΔΙΚΤΥΑ</h3>
+              <div className="grid grid-cols-1 gap-3 max-h-[450px] overflow-y-auto pr-2">
                 {networks.map((net) => (
-                  <label key={net} className="flex items-center group cursor-pointer bg-white p-4 rounded-2xl shadow-sm border-2 border-transparent hover:border-blue-400 transition-all">
+                  <label key={net} className="flex items-center group cursor-pointer bg-white p-3.5 rounded-2xl shadow-sm border-2 border-transparent hover:border-blue-400 transition-all">
                     <input 
                       type="checkbox" 
                       checked={selectedNetworks.includes(net)} 
                       onChange={() => toggleNetwork(net)} 
-                      className="w-6 h-6 rounded-lg border-gray-300 text-blue-800 focus:ring-blue-700 accent-blue-800 cursor-pointer" 
+                      className="w-5 h-5 rounded-lg border-gray-300 text-blue-800 focus:ring-blue-700 accent-blue-800 cursor-pointer" 
                     />
-                    <span className={`ml-4 font-bold transition-colors ${selectedNetworks.includes(net) ? 'text-blue-900' : 'text-gray-600'}`}>
+                    <span className={`ml-3 text-sm font-bold transition-colors ${selectedNetworks.includes(net) ? 'text-blue-900' : 'text-gray-600'}`}>
                       {net}
                     </span>
                   </label>
@@ -174,28 +168,37 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="w-full md:w-1/2 p-10 md:p-14 relative">
-              <h3 className="text-2xl font-black text-blue-950 mb-8 uppercase tracking-tight">ΜΗΝΥΜΑ ΠΡΟΣ ΔΙΚΤΥΟ</h3>
-              <form action="https://formspree.io/f/mgodrbbj" method="POST" className="space-y-6">
-                <input 
-                  name="username" 
-                  required 
-                  type="text" 
-                  placeholder="Δημόσιο Ψευδώνυμο" 
-                  className="w-full p-5 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-4 focus:ring-blue-100 outline-none font-bold text-gray-900" 
-                />
-                <textarea 
-                  name="message" 
-                  required 
-                  rows={6} 
-                  placeholder="Το μήνυμά σας..." 
-                  className="w-full p-5 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-4 focus:ring-blue-100 outline-none resize-none font-medium text-gray-900"
-                ></textarea>
+            {/* 2. Live Chat */}
+            <div className="p-8 md:p-12 border-b lg:border-b-0 lg:border-r border-gray-100 flex flex-col">
+              <h3 className="text-xl font-black text-blue-950 mb-6 uppercase tracking-tight">ΖΩΝΤΑΝΗ ΣΥΝΟΜΙΛΙΑ</h3>
+              <LiveChat />
+            </div>
+
+            {/* 3. Μήνυμα προς δίκτυο (Formspree) */}
+            <div className="p-8 md:p-12 flex flex-col">
+              <h3 className="text-xl font-black text-blue-950 mb-6 uppercase tracking-tight">ΜΗΝΥΜΑ ΠΡΟΣ ΔΙΚΤΥΟ</h3>
+              <form action="https://formspree.io/f/mgodrbbj" method="POST" className="space-y-4 flex-1 flex flex-col justify-between">
+                <div className="space-y-4">
+                  <input 
+                    name="username" 
+                    required 
+                    type="text" 
+                    placeholder="Δημόσιο Ψευδώνυμο" 
+                    className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-4 focus:ring-blue-100 outline-none font-bold text-gray-900 text-sm" 
+                  />
+                  <textarea 
+                    name="message" 
+                    required 
+                    rows={5} 
+                    placeholder="Το μήνυμά σας..." 
+                    className="w-full p-4 bg-gray-50 border border-gray-100 rounded-2xl focus:ring-4 focus:ring-blue-100 outline-none resize-none font-medium text-gray-900 text-sm"
+                  ></textarea>
+                </div>
                 <button 
                   type="submit" 
-                  className="w-full py-5 bg-blue-900 text-white font-black rounded-2xl hover:bg-blue-800 hover:shadow-2xl transition-all active:scale-95 uppercase tracking-widest text-lg shadow-blue-200 shadow-lg"
+                  className="w-full py-4 bg-blue-900 text-white font-black rounded-2xl hover:bg-blue-800 transition-all uppercase tracking-widest text-sm shadow-md"
                 >
-                  ΑΠΟΣΤΟΛΗ ΜΗΝΥΜΑΤΟΣ
+                  ΑΠΟΣΤΟΛΗ
                 </button>
               </form>
             </div>
