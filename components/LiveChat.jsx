@@ -5,12 +5,23 @@ import { supabase } from '../app/lib/supabase'
 export default function LiveChat() {
   const [messages, setMessages] = useState([])
   const [newMessage, setNewMessage] = useState('')
-  const [alias, setAlias] = useState('')
+  const [alias, setAlias] + useState('')
+  const [userToken, setUserToken] = useState('')
   const [isEditingAlias, setIsEditingAlias] = useState(false)
   const [tempAlias, setTempAlias] = useState('')
+  const [errorMsg, setErrorMsg] = useState('')
   const messagesEndRef = useRef(null)
 
   useEffect(() => {
+    // 1. Δημιουργία ή ανάκτηση μοναδικού Device Token για τον browser
+    let token = localStorage.getItem('chat_device_token')
+    if (!token) {
+      token = 'user_' + Math.random().toString(36).substring(2) + Date.now().toString(36)
+      localStorage.setItem('chat_device_token', token)
+    }
+    setUserToken(token)
+
+    // 2. Ανάκτηση ή δημιουργία αρχικού ψευδωνύμου
     const savedAlias = localStorage.getItem('chat_user_alias')
     if (savedAlias) {
       setAlias(savedAlias)
@@ -23,6 +34,7 @@ export default function LiveChat() {
       localStorage.setItem('chat_user_alias', defaultAlias)
     }
 
+    // 3. Φόρτωση μηνυμάτων
     const fetchMessages = async () => {
       const { data, error } = await supabase
         .from('messages')
@@ -36,6 +48,7 @@ export default function LiveChat() {
 
     fetchMessages()
 
+    // 4. Realtime subscription
     const channel = supabase
       .channel('public:messages')
       .on(
@@ -56,14 +69,37 @@ export default function LiveChat() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
-  const handleSaveAlias = (e) => {
+  // Έλεγχος και αποθήκευση μοναδικού ψευδωνύμου
+  const handleSaveAlias = async (e) => {
     e.preventDefault()
-    if (!tempAlias.trim()) return
-    setAlias(tempAlias.trim())
-    localStorage.setItem('chat_user_alias', tempAlias.trim())
+    const trimmed = tempAlias.trim()
+    if (!trimmed) return
+
+    if (trimmed === alias) {
+      setIsEditingAlias(false)
+      return
+    }
+
+    // Ελέγχουμε αν το όνομα το χρησιμοποιεί άλλος χρήστης με διαφορετικό token
+    const { data, error } = await supabase
+      .from('messages')
+      .select('user_token')
+      .eq('username', trimmed)
+      .neq('user_token', userToken)
+      .limit(1)
+
+    if (data && data.length > 0) {
+      setErrorMsg('Αυτό το όνομα χρησιμοποιείται ήδη από άλλον χρήστη!')
+      return
+    }
+
+    setErrorMsg('')
+    setAlias(trimmed)
+    localStorage.setItem('chat_user_alias', trimmed)
     setIsEditingAlias(false)
   }
 
+  // Αποστολή μηνύματος με το token ασφαλείας
   const sendMessage = async (e) => {
     e.preventDefault()
     if (!newMessage.trim()) return
@@ -71,7 +107,8 @@ export default function LiveChat() {
     const { error } = await supabase.from('messages').insert([
       {
         content: newMessage.trim(),
-        username: alias, // Χρήση της στήλης username που υπάρχει στη βάση σου
+        username: alias,
+        user_token: userToken, // Κλειδώνει το μήνυμα στη δική σου συσκευή
       },
     ])
 
@@ -83,29 +120,32 @@ export default function LiveChat() {
   }
 
   return (
-    <div className="flex flex-col h-[480px] w-full border rounded-3xl bg-white shadow-sm overflow-hidden border-gray-100">
+    <div className="flex flex-col h-[500px] w-full border rounded-3xl bg-white shadow-sm overflow-hidden border-gray-100">
       <div className="bg-blue-900 text-white p-4 text-sm font-bold flex flex-col sm:flex-row justify-between items-center gap-2">
         <span>💬 Ανώνυμο Live Chat</span>
         
         {isEditingAlias ? (
-          <form onSubmit={handleSaveAlias} className="flex items-center gap-1">
-            <input
-              type="text"
-              value={tempAlias}
-              onChange={(e) => setTempAlias(e.target.value)}
-              className="text-xs px-2 py-1 rounded text-gray-900 bg-white outline-none font-medium"
-              placeholder="Ψευδώνυμο..."
-              autoFocus
-            />
-            <button type="submit" className="bg-blue-700 hover:bg-blue-600 px-2 py-1 rounded text-xs">
-              OK
-            </button>
-          </form>
+          <div className="flex flex-col items-end gap-1">
+            <form onSubmit={handleSaveAlias} className="flex items-center gap-1">
+              <input
+                type="text"
+                value={tempAlias}
+                onChange={(e) => setTempAlias(e.target.value)}
+                className="text-xs px-2 py-1 rounded text-gray-900 bg-white outline-none font-medium"
+                placeholder="Νέο ψευδώνυμο..."
+                autoFocus
+              />
+              <button type="submit" className="bg-blue-700 hover:bg-blue-600 px-2 py-1 rounded text-xs">
+                OK
+              </button>
+            </form>
+            {errorMsg && <span className="text-[10px] text-red-300">{errorMsg}</span>}
+          </div>
         ) : (
           <div className="flex items-center gap-2 text-xs bg-blue-800/80 px-3 py-1 rounded-full text-blue-100">
             <span>Εσύ: <b>{alias}</b></span>
             <button 
-              onClick={() => setIsEditingAlias(true)} 
+              onClick={() => { setIsEditingAlias(true); setErrorMsg(''); }} 
               className="underline hover:text-white transition text-[11px]"
             >
               (Αλλαγή)
@@ -116,7 +156,8 @@ export default function LiveChat() {
 
       <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-gray-50/50">
         {messages.map((msg) => {
-          const isMe = msg.username === alias
+          // Το μήνυμα είναι δικό σου αν ταιριάζει το μοναδικό σου user_token
+          const isMe = msg.user_token === userToken
           return (
             <div key={msg.id} className={`flex flex-col ${isMe ? 'items-end' : 'items-start'}`}>
               <span className="text-[10px] text-gray-400 mb-1 px-1">{msg.username}</span>
