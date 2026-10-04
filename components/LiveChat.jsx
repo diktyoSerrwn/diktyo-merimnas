@@ -68,8 +68,9 @@ export default function LiveChat() {
     }
   }, [])
 
+  // Διορθωμένο scroll ώστε να μην κινείται ολόκληρη η σελίδα προς τα κάτω
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
   }, [messages])
 
   const handleSaveAlias = async (e) => {
@@ -204,7 +205,7 @@ export default function LiveChat() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Form - Διορθωμένο πλάτος ώστε να φαίνεται πάντα το κουμπί */}
+      {/* Input Form */}
       <form onSubmit={sendMessage} className="p-2.5 border-t bg-white flex gap-1.5 items-center">
         <input
           type="text"
