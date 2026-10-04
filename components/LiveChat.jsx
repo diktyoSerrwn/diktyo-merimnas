@@ -11,7 +11,6 @@ export default function LiveChat() {
   const messagesEndRef = useRef(null)
 
   useEffect(() => {
-    // Έλεγχος αν υπάρχει ήδη αποθηκευμένο ψευδώνυμο στον browser
     const savedAlias = localStorage.getItem('chat_user_alias')
     if (savedAlias) {
       setAlias(savedAlias)
@@ -24,7 +23,6 @@ export default function LiveChat() {
       localStorage.setItem('chat_user_alias', defaultAlias)
     }
 
-    // 1. Φόρτωση προηγούμενων μηνυμάτων από τη Supabase
     const fetchMessages = async () => {
       const { data, error } = await supabase
         .from('messages')
@@ -38,7 +36,6 @@ export default function LiveChat() {
 
     fetchMessages()
 
-    // 2. Realtime subscription για νέα μηνύματα
     const channel = supabase
       .channel('public:messages')
       .on(
@@ -55,12 +52,10 @@ export default function LiveChat() {
     }
   }, [])
 
-  // Αυτόματο scroll κάτω όταν έρχεται μήνυμα
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
-  // Αποθήκευση νέου custom ψευδωνύμου
   const handleSaveAlias = (e) => {
     e.preventDefault()
     if (!tempAlias.trim()) return
@@ -69,7 +64,6 @@ export default function LiveChat() {
     setIsEditingAlias(false)
   }
 
-  // Αποστολή μηνύματος
   const sendMessage = async (e) => {
     e.preventDefault()
     if (!newMessage.trim()) return
@@ -77,7 +71,7 @@ export default function LiveChat() {
     const { error } = await supabase.from('messages').insert([
       {
         content: newMessage.trim(),
-        sender_alias: alias,
+        username: alias, // Χρήση της στήλης username που υπάρχει στη βάση σου
       },
     ])
 
@@ -90,7 +84,6 @@ export default function LiveChat() {
 
   return (
     <div className="flex flex-col h-[480px] w-full border rounded-3xl bg-white shadow-sm overflow-hidden border-gray-100">
-      {/* Header & Alias Changer */}
       <div className="bg-blue-900 text-white p-4 text-sm font-bold flex flex-col sm:flex-row justify-between items-center gap-2">
         <span>💬 Ανώνυμο Live Chat</span>
         
@@ -121,13 +114,12 @@ export default function LiveChat() {
         )}
       </div>
 
-      {/* Messages Box (Μηνύματα που μένουν αποθηκευμένα) */}
       <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-gray-50/50">
         {messages.map((msg) => {
-          const isMe = msg.sender_alias === alias
+          const isMe = msg.username === alias
           return (
             <div key={msg.id} className={`flex flex-col ${isMe ? 'items-end' : 'items-start'}`}>
-              <span className="text-[10px] text-gray-400 mb-1 px-1">{msg.sender_alias}</span>
+              <span className="text-[10px] text-gray-400 mb-1 px-1">{msg.username}</span>
               <div
                 className={`p-3 rounded-2xl max-w-[85%] text-sm font-medium break-words ${
                   isMe ? 'bg-blue-600 text-white rounded-br-none' : 'bg-white text-gray-800 border border-gray-100 rounded-bl-none shadow-sm'
@@ -141,7 +133,6 @@ export default function LiveChat() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Form */}
       <form onSubmit={sendMessage} className="p-3 border-t bg-white flex gap-2">
         <input
           type="text"
