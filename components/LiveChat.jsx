@@ -5,7 +5,7 @@ import { supabase } from '../app/lib/supabase'
 export default function LiveChat() {
   const [messages, setMessages] = useState([])
   const [newMessage, setNewMessage] = useState('')
-  const [alias, setAlias] + useState('')
+  const [alias, setAlias] = useState('')
   const [userToken, setUserToken] = useState('')
   const [isEditingAlias, setIsEditingAlias] = useState(false)
   const [tempAlias, setTempAlias] = useState('')
@@ -13,7 +13,6 @@ export default function LiveChat() {
   const messagesEndRef = useRef(null)
 
   useEffect(() => {
-    // 1. Δημιουργία ή ανάκτηση μοναδικού Device Token για τον browser
     let token = localStorage.getItem('chat_device_token')
     if (!token) {
       token = 'user_' + Math.random().toString(36).substring(2) + Date.now().toString(36)
@@ -21,7 +20,6 @@ export default function LiveChat() {
     }
     setUserToken(token)
 
-    // 2. Ανάκτηση ή δημιουργία αρχικού ψευδωνύμου
     const savedAlias = localStorage.getItem('chat_user_alias')
     if (savedAlias) {
       setAlias(savedAlias)
@@ -34,7 +32,6 @@ export default function LiveChat() {
       localStorage.setItem('chat_user_alias', defaultAlias)
     }
 
-    // 3. Φόρτωση μηνυμάτων
     const fetchMessages = async () => {
       const { data, error } = await supabase
         .from('messages')
@@ -48,7 +45,6 @@ export default function LiveChat() {
 
     fetchMessages()
 
-    // 4. Realtime subscription
     const channel = supabase
       .channel('public:messages')
       .on(
@@ -69,7 +65,6 @@ export default function LiveChat() {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
-  // Έλεγχος και αποθήκευση μοναδικού ψευδωνύμου
   const handleSaveAlias = async (e) => {
     e.preventDefault()
     const trimmed = tempAlias.trim()
@@ -80,7 +75,6 @@ export default function LiveChat() {
       return
     }
 
-    // Ελέγχουμε αν το όνομα το χρησιμοποιεί άλλος χρήστης με διαφορετικό token
     const { data, error } = await supabase
       .from('messages')
       .select('user_token')
@@ -99,7 +93,6 @@ export default function LiveChat() {
     setIsEditingAlias(false)
   }
 
-  // Αποστολή μηνύματος με το token ασφαλείας
   const sendMessage = async (e) => {
     e.preventDefault()
     if (!newMessage.trim()) return
@@ -108,7 +101,7 @@ export default function LiveChat() {
       {
         content: newMessage.trim(),
         username: alias,
-        user_token: userToken, // Κλειδώνει το μήνυμα στη δική σου συσκευή
+        user_token: userToken,
       },
     ])
 
@@ -156,7 +149,6 @@ export default function LiveChat() {
 
       <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-gray-50/50">
         {messages.map((msg) => {
-          // Το μήνυμα είναι δικό σου αν ταιριάζει το μοναδικό σου user_token
           const isMe = msg.user_token === userToken
           return (
             <div key={msg.id} className={`flex flex-col ${isMe ? 'items-end' : 'items-start'}`}>
