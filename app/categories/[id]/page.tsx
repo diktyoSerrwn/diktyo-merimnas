@@ -46,46 +46,46 @@ export default function CategoryPage({ params }: { params: Promise<{ id: string 
             <div className="space-y-8 text-gray-800">
               <div className="border-b pb-6">
                 <p className="text-lg font-medium italic text-blue-900">
-                  Το Δίκτυο Βελτίωσης της Φοιτητικής Ζωής αποτελεί βασικό πυλώνα του Φοιτητικού Δικτύου Σερρών[cite: 5].
+                  Το Δίκτυο Βελτίωσης της Φοιτητικής Ζωής αποτελεί βασικό πυλώνα του Φοιτητικού Δικτύου Σερρών.
                 </p>
               </div>
               <div>
                 <h3 className="text-xl font-black text-blue-950 uppercase mb-4 tracking-tight">🎯 Όραμα και Ρόλος</h3>
                 <ul className="list-disc pl-6 space-y-2 text-gray-700 font-medium">
-                  <li>Εκφράζει στην πράξη το όραμα για μια κοινωνία ανθρωπισμού, αξιοπρέπειας και ίσων ευκαιριών[cite: 5].</li>
-                  <li>Διασφαλίζει ότι κανένας/καμία δεν αποκλείεται από τη μόρφωση, τη συμμετοχή και τη συλλογική ζωή[cite: 5].</li>
-                  <li>Αντιμετωπίζει τα οικονομικά, κοινωνικά και υλικά εμπόδια ως συλλογική ευθύνη[cite: 5].</li>
-                  <li>Λειτουργεί στη βάση της αυτοοργάνωσης, της συλλογικής ευθύνης και της αλληλεγγύης[cite: 5].</li>
-                  <li>Χωρίς εμπορικό χαρακτήρα — χωρίς κομματικές ή άλλες εξαρτήσεις[cite: 5].</li>
+                  <li>Εκφράζει στην πράξη το όραμα για μια κοινωνία ανθρωπισμού, αξιοπρέπειας και ίσων ευκαιριών.</li>
+                  <li>Διασφαλίζει ότι κανένας/καμία δεν αποκλείεται από τη μόρφωση, τη συμμετοχή και τη συλλογική ζωή.</li>
+                  <li>Αντιμετωπίζει τα οικονομικά, κοινωνικά και υλικά εμπόδια ως συλλογική ευθύνη.</li>
+                  <li>Λειτουργεί στη βάση της αυτοοργάνωσης, της συλλογικής ευθύνης και της αλληλεγγύης.</li>
+                  <li>Χωρίς εμπορικό χαρακτήρα — χωρίς κομματικές ή άλλες εξαρτήσεις.</li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-xl font-black text-blue-950 uppercase mb-4 tracking-tight">🚀 Πεδίο Δράσης</h3>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm font-medium text-gray-700">
-                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Δημιουργία φοιτητικών εστιών[cite: 5]</li>
-                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Δωρεάν στέγαση για όλους τους φοιτητές[cite: 5]</li>
-                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Δωρεάν μετακίνηση εντός της πόλης φοίτησης[cite: 5]</li>
-                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Δωρεάν μετακίνηση μεταξύ πόλης φοίτησης και πόλης διαμονής[cite: 5]</li>
-                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Μειωμένο εισιτήριο στην Ελλάδα και την Ευρωπαϊκή Ένωση[cite: 5]</li>
-                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Δωρεάν και αξιοπρεπή σίτιση για όλους τους φοιτητές[cite: 5]</li>
-                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Πλήρης κάλυψη εξόδων συμμετοχής σε προγράμματα Erasmus[cite: 5]</li>
-                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Πλήρη κάλυψη της υγείας για όλους τους φοιτητές[cite: 5]</li>
-                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Κοινωνικός τουρισμός για όλους τους φοιτητές[cite: 5]</li>
-                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Δημιουργία χώρων συνάντησης και συλλογικής ζωής φοιτητών[cite: 5]</li>
-                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Λειτουργία αιθουσών εκδηλώσεων, ομιλιών και διαλόγου[cite: 5]</li>
-                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Πλήρης κρατική στήριξη φοιτητών σε περίπτωση οικονομικής αδυναμίας της οικογένειας[cite: 5]</li>
-                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Δωρεάν μεταπτυχιακές σπουδές για όλους τους φοιτητές[cite: 5]</li>
-                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Χορήγηση υποτροφιών σε μεταπτυχιακούς φοιτητές[cite: 5]</li>
-                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Χορήγηση υποτροφιών σε υποψήφιους διδάκτορες[cite: 5]</li>
+                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Δημιουργία φοιτητικών εστιών</li>
+                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Δωρεάν στέγαση για όλους τους φοιτητές</li>
+                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Δωρεάν μετακίνηση εντός της πόλης φοίτησης</li>
+                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Δωρεάν μετακίνηση μεταξύ πόλης φοίτησης και πόλης διαμονής</li>
+                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Μειωμένο εισιτήριο στην Ελλάδα και την Ευρωπαϊκή Ένωση</li>
+                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Δωρεάν και αξιοπρεπή σίτιση για όλους τους φοιτητές</li>
+                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Πλήρης κάλυψη εξόδων συμμετοχής σε προγράμματα Erasmus</li>
+                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Πλήρη κάλυψη της υγείας για όλους τους φοιτητές</li>
+                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Κοινωνικός τουρισμός για όλους τους φοιτητές</li>
+                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Δημιουργία χώρων συνάντησης και συλλογικής ζωής φοιτητών</li>
+                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Λειτουργία αιθουσών εκδηλώσεων, ομιλιών και διαλόγου</li>
+                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Πλήρης κρατική στήριξη φοιτητών σε περίπτωση οικονομικής αδυναμίας της οικογένειας</li>
+                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Δωρεάν μεταπτυχιακές σπουδές για όλους τους φοιτητές</li>
+                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Χορήγηση υποτροφιών σε μεταπτυχιακούς φοιτητές</li>
+                  <li className="bg-blue-50/50 p-3 rounded-xl border border-blue-100">✨ Χορήγηση υποτροφιών σε υποψήφιους διδάκτορες</li>
                 </ul>
               </div>
               <div>
                 <h3 className="text-xl font-black text-blue-950 uppercase mb-4 tracking-tight">🤝 Οργάνωση & Συνεργασίες</h3>
                 <ul className="list-disc pl-6 space-y-2 text-gray-700 font-medium">
-                  <li>Λειτουργεί με ανοιχτές ομάδες εργασίας[cite: 5].</li>
-                  <li>Διαθέτει συντονιστές με εναλλασσόμενο και ανακλητό ρόλο[cite: 5].</li>
-                  <li>Συνεργάζεται ισότιμα με όλα τα Δίκτυα της φοιτητικής κοινότητας[cite: 5].</li>
-                  <li>Συνεργάζεται με κοινωνικούς φορείς χωρίς εξαρτήσεις[cite: 5].</li>
+                  <li>Λειτουργεί με ανοιχτές ομάδες εργασίας.</li>
+                  <li>Διαθέτει συντονιστές με εναλλασσόμενο και ανακλητό ρόλο.</li>
+                  <li>Συνεργάζεται ισότιμα με όλα τα Δίκτυα της φοιτητικής κοινότητας.</li>
+                  <li>Συνεργάζεται με κοινωνικούς φορείς χωρίς εξαρτήσεις.</li>
                 </ul>
               </div>
             </div>
